@@ -1,6 +1,8 @@
 #ifndef SENSOR_DPS310_H
 #define SENSOR_DPS310_H
 
+#define DPS310_READ_WAIT_FOR_REG_ATTEMPTS 5
+
 #include "stdint.h"
 #include "dps310_registers.h"
 

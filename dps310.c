@@ -20,8 +20,6 @@ static uint8_t g_pressure_rate = DPS310_CFG_RATE_1_MEAS;
 static uint8_t g_temperature_rate = DPS310_CFG_RATE_1_MEAS;
 static float g_last_temp_raw_sc;
 
-#define MAX_CONSECUTIVE_READ_ATTEMPTS 500
-
 static int16_t read_coefs();
 
 static int32_t get_two_complement_of(uint32_t value, uint8_t length);
@@ -248,7 +246,7 @@ int16_t wait_for_reg_value(uint8_t reg_addr, uint8_t reg_value, uint8_t mask) {
     uint8_t buff[1];
     uint16_t attempts = 0;
 
-    while (attempts < MAX_CONSECUTIVE_READ_ATTEMPTS) {
+    while (attempts < DPS310_READ_WAIT_FOR_REG_ATTEMPTS) {
         attempts++;
 
         ret = dps310_i2c_read(I2C_DPS310_ADDRESS, reg_addr, buff, 1);
@@ -260,7 +258,7 @@ int16_t wait_for_reg_value(uint8_t reg_addr, uint8_t reg_value, uint8_t mask) {
         dps310_i2c_delay_ms(1);
     }
 
-    if (attempts == MAX_CONSECUTIVE_READ_ATTEMPTS) {
+    if (attempts == DPS310_READ_WAIT_FOR_REG_ATTEMPTS) {
         return DPS310_WAIT_TIMEOUT_ERROR;
     }
 
