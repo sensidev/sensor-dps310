@@ -4,7 +4,7 @@
 #include "stdint.h"
 #include "dps310_registers.h"
 
-#define DPS310_READ_WAIT_FOR_REG_ATTEMPTS 5
+#define DPS310_READ_WAIT_FOR_REG_ATTEMPTS 3
 
 typedef enum {
     IDLE = DPS310_MEAS_CFG_MEAS_CTRL_IDLE,
